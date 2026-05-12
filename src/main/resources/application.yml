@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: payment-simulator
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all
+      retries: 3
+      properties:
+        enable.idempotence: true
+        linger.ms: 5
+        batch.size: 16384 # 16KB
+        max.in.flight.requests.per.connection: 5
+
+simulator:
+  topic:
+    payments-raw:
+      name: payments.raw
+      partitions: 24
+      replicas: 1
+  rate:
+    normal-traffic-ms: 500
+  fraud:
+    chaos-probability: 0.02
+
+server:
+  port: 8080
