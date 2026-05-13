@@ -22,6 +22,10 @@ simulator:
       replicas: 1
   rate:
     normal-traffic-ms: 500
+  traffic:
+    auto-enabled: true
+    min-batch-size: 10
+    max-batch-size: 50
   fraud:
     chaos-probability: 0.02
 
